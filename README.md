@@ -197,7 +197,7 @@ Mas **se o bit não chegar inteiro**, o resto é irrelevante.
 
 ---
 
-# 🔗 Camada 2 – Enlace de Dados (Redes Corporativas)
+# 🔗 Camada 2 – Enlace de Dados
 
 A Camada 2 do modelo OSI controla como os dispositivos compartilham o meio físico e garante que os quadros (frames) trafeguem com integridade dentro de uma mesma rede local. É a camada que realmente dá “forma” à LAN corporativa.
 
@@ -339,7 +339,7 @@ Sem uma Camada 2 sólida, qualquer iniciativa de segurança ou roteamento vira c
 
 ---
 
-# 🌐 Camada 3 – Rede (Redes Corporativas)
+# 🌐 Camada 3 – Rede
 
 A Camada 3 do modelo OSI é responsável pelo **endereçamento lógico**, **roteamento** e **comunicação entre redes distintas**.  
 É aqui que a LAN deixa de ser um ambiente isolado e passa a conversar com outras sub-redes, filiais, datacenters e a internet.
@@ -561,6 +561,117 @@ Sem Camada 3 configurada direito:
 A Camada 3 é o ponto onde **rede, segurança e arquitetura se unem**.
 
 ---
+# 🚚 Camada 4 — Transporte
+A Camada 4 é responsável por garantir **como** os dados trafegam entre origem e destino — confiável, rápido ou simples.  
+Ela lida com **conexões**, **controle de fluxo**, **portas** e **segmentação**.
+
+---
+
+## 🔢 Portas — A Identidade dos Serviços
+Portas definem **qual aplicação** deve receber o tráfego.
+
+- **0–1023** → Portas bem conhecidas (HTTP 80, HTTPS 443, DNS 53, SSH 22)  
+- **1024–49151** → Portas registradas  
+- **49152–65535** → Portas dinâmicas / efêmeras
+
+**Por que isso importa em redes corporativas?**  
+Firewalls, NACLs, proxies e IDS dependem de portas para criar regras de segurança.
+
+---
+
+## 🔄 TCP — Conexão Confiável
+TCP oferece **entrega garantida**, ordenada e com controle de fluxo.
+
+### Características:
+- Conexão orientada (**3-way handshake**)  
+- Retransmissão de pacotes perdidos  
+- Janela deslizante (flow control)  
+- Congestion control  
+
+### Usado em:
+- HTTP/HTTPS  
+- SSH  
+- FTP  
+- E-mail (IMAP, SMTP com TLS)  
+
+**Vantagem:** confiabilidade  
+**Desvantagem:** overhead maior
+
+---
+
+## ⚡ UDP — Velocidade sem Frescura
+UDP é **não confiável**, mas extremamente rápido.
+
+### Características:
+- Sem handshake  
+- Sem retransmissão  
+- Baixa latência  
+
+### Usado em:
+- DNS  
+- VoIP  
+- Jogos online  
+- Streaming  
+- Broadcast/multicast  
+
+**Vantagem:** velocidade  
+**Desvantagem:** sem garantia de entrega
+
+---
+
+## 🧱 Firewalls e a Camada 4
+Grande parte dos firewalls trabalha **no mínimo até a camada 4**, analisando:
+- Porta  
+- Protocolo (TCP/UDP)  
+- Estado da conexão (stateful firewall)  
+- Flags TCP (SYN, ACK, FIN, RST)  
+
+A camada 4 é onde surge o conceito de:
+- **Allow/Deny baseado em portas**
+- **Stateful inspection**
+- **Port knocking**
+- **TCP/UDP filtering**
+
+---
+
+## 📦 Segmentação e Reassembly
+A Camada 4 divide dados em:
+- **Segs. TCP**
+- **Datagramas UDP**
+
+Ela gerencia:
+- Tamanho dos segmentos (**MSS**)  
+- Velocidade (**flow control**)  
+- Detecção de perda (**retransmission**)  
+
+---
+
+## 🕵 Monitoramento e Segurança
+Ferramentas essenciais focadas na Camada 4:
+
+- **Nmap** (SYN scan, ACK scan, UDP scan)  
+- **Netstat / ss**  
+- **TCPDump / Wireshark**  
+- **Hping3** (crafting de pacotes)  
+
+A camada 4 revela:
+- Serviços expostos  
+- Portas vulneráveis  
+- Tentativas de conexão indevidas  
+- Tráfego suspeito em protocolos críticos  
+
+---
+
+## 🧠 Resumo Direto
+- **TCP = confiabilidade**  
+- **UDP = velocidade**  
+- **Portas determinam a aplicação-alvo**  
+- **Firewalls dependem fortemente da camada 4**  
+- **Monitoramento e pentest focam muito aqui**  
+
+A Camada 4 é onde a rede deixa de ser apenas “tráfego” e passa a ser **comunicação real entre aplicações**.
+
+===
 
 # 🔐 Segurança de Redes — Foco na Camada 4 (Transporte)
 
