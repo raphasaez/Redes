@@ -86,9 +86,116 @@ Elas são essenciais para comunicação, armazenamento e gerenciamento de inform
 - [Wikipedia: Computer Network](https://en.wikipedia.org/wiki/Computer_network) 📚  
 
 ---
+# 🧵 Camada 1 – Física
+
+A Camada 1 do modelo OSI é onde tudo começa. É a base bruta da comunicação: sinais elétricos, ópticos e radiofrequência. Se essa camada falha, o resto da rede nem chega a existir. Em ambientes corporativos, ela é crítica porque define **confiabilidade**, **desempenho** e **limites físicos** da infraestrutura.
+
+---
+
+## 🔌 O que a Camada 1 realmente trata
+
+- Cabos, conectores e padrões físicos  
+- Sinalização (eletrônica, óptica, RF)  
+- Topologias físicas  
+- Especificações mecânicas e elétricas  
+- Meios de transmissão  
+- Limites de distância e interferência  
+
+Sem protocolos, sem endereços, sem lógica. Só bits crus se movendo.
+
+---
+
+## 🧱 Principais meios físicos em redes corporativas
+
+### **1. Par trançado (Ethernet cobre)**
+- Cat5e, Cat6, Cat6A, Cat7  
+- Limite típico: 100 m  
+- Suporta até 10Gbps (em Cat6A)  
+- Sensível a interferência eletromagnética  
+- Mais comum em redes LAN corporativas  
+
+### **2. Fibra óptica**
+- Single-mode (longa distância, backbone)  
+- Multi-mode (curta distância, datacenters)  
+- Imune a EMI  
+- Suporta dezenas de quilômetros  
+- Usada para uplinks de alta capacidade  
+
+### **3. Rádio/Wireless**
+- Wi-Fi corporativo (2.4GHz / 5GHz / 6GHz)  
+- Antenas direcionais para links P2P  
+- Propenso a interferências e atenuação  
+
+---
+
+## 🔧 Componentes de Camada 1
+
+### **Patch panels**
+Organizam terminação de cabos.
+
+### **Racks e bandejamento**
+Infraestrutura física para organização.
+
+### **Modems, amplificadores, repetidores**
+Esticam alcance e regeneram sinais.
+
+### **Transceivers (SFP, SFP+, QSFP)**
+Conversão óptico/elétrico.
+
+---
+
+## 📡 Sinalização e características elétricas
+
+- Codificação de linha (NRZ, PAM-4 etc.)  
+- Atenuação  
+- Crosstalk  
+- Impedância e blindagem  
+- Taxas de erro (BER)
+
+Esses fatores determinam a estabilidade de links críticos, como servidores, switches core e storages.
+
+---
+
+## 🏗️ Boas práticas para redes corporativas
+
+- Seguir normas TIA/EIA-568  
+- Evitar curvar cabos acima do limite  
+- Manter separação entre cabos elétricos e de dados  
+- Usar fibra no backbone  
+- Testar cabos com certificadores profissionais (Fluke)  
+- Racks organizados → menos perda de tempo na manutenção  
+
+---
+
+## 🔥 Riscos comuns na Camada 1
+
+- Cabos mal crimpados  
+- Cabos baratos fora de padrão  
+- Interferência de motores, UPS, iluminação industrial  
+- Fibra suja ou mal polida  
+- Patch cords ruins conectados a infraestrutura boa  
+
+---
+
+## 🛠️ Troubleshooting básico
+
+- Teste de continuidade  
+- Certificação de cabo  
+- Loopback  
+- Troca de patch cord  
+- Verificação de porta física (LEDs)  
+- Ajustar autonegociação (caso extremo)  
+
+---
+
+## 🎯 Por que a Camada 1 importa?
+
+Porque você pode ter VLAN, firewall, IDS, roteamento avançado…  
+Mas **se o bit não chegar inteiro**, o resto é irrelevante.
 
 > 🌟 Redes bem projetadas não apenas conectam computadores, mas conectam pessoas, empresas e o mundo digital com segurança e eficiência.
 
+---
 
 # 🔐 Segurança de Redes — Foco na Camada 4 (Transporte)
 
