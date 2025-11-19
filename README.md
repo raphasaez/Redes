@@ -783,4 +783,206 @@ Detectar:
 - **fail2ban** → bloquear brute force  
 - **pfSense/OPNsense** → firewall stateful robusto  
 
+---
 
+# 🛡️ Camada 7 — Aplicação  
+Segurança na Camada mais Crítica da Rede
+
+A Camada 7 é onde tudo realmente acontece: APIs, web apps, autenticação, bancos de dados, sistemas corporativos, SaaS…  
+E, por isso, **é a camada mais atacada e explorada da segurança moderna**.
+
+---
+
+# 🎯 Por que a Camada 7 é crítica?
+Enquanto as camadas 1–4 lidam com transporte, velocidade, roteamento e portas…  
+A Camada 7 lida com **lógica de aplicação**, onde o atacante pode manipular:
+
+- Requisições HTTP/HTTPS  
+- Parâmetros, headers, cookies  
+- Sessões e tokens  
+- Serialização  
+- Uploads  
+- APIs REST/GraphQL  
+- Autenticação e autorização  
+
+Quando essa camada falha, a rede inteira cai junto.
+
+---
+
+# 🔥 Principais Ameaças da Camada 7
+
+## 1. **OWASP Top 10**
+A lista mais relevante do mundo para segurança de aplicações.
+
+Inclui ameaças como:
+- Injeções (SQLi, NoSQLi, LDAPi)  
+- Quebra de autenticação  
+- Exposição de dados sensíveis  
+- Falhas de autorização  
+- SSRF  
+- RCE  
+- Deserialização insegura  
+- Controle inadequado de acesso  
+
+Essas falhas são responsáveis pela maior parte dos incidentes reais.
+
+---
+
+## 2. **Ataques Contra APIs**
+APIs são hoje o principal alvo corporativo.
+
+Riscos comuns:
+- Bypass de autenticação  
+- Rate limit inexistente  
+- Exposição de dados internos  
+- API Keys vazadas  
+- Inadequate Authorization (IDOR)  
+- GraphQL introspection aberta  
+
+APIs mal configuradas servem de pivô para ataques maiores.
+
+---
+
+## 3. **Manipulação de Sessão**
+Tudo relacionado a login e persistência do usuário é crítico.
+
+Riscos:
+- Cookies sem `HttpOnly` e `Secure`  
+- Sessões previsíveis  
+- JWT sem expiração  
+- Reuso de tokens  
+- Falta de rotação após login  
+
+Um erro aqui e o atacante se torna o usuário.
+
+---
+
+## 4. **Ataques HTTP Exploratórios**
+A Camada 7 permite ataques complexos e difíceis de detectar:
+
+- Slowloris  
+- HTTP Request Smuggling  
+- HTTP Response Splitting  
+- Header Injection  
+- Cache Poisoning  
+- Host Header Attack  
+
+Esse tipo de ataque **contorna firewalls tradicionais**.
+
+---
+
+## 5. **Upload e Manipulação de Arquivos**
+Um dos vetores mais perigosos.
+
+Falhas comuns:
+- Upload de webshell  
+- Validação fraca de extensão/MIME  
+- Upload de `.php`, `.jsp`, `.aspx` disfarçado  
+- Path traversal  
+- Exploitação de imagem/PDF (XXE, payloads)  
+
+Aplicação sem validação de upload é suicídio.
+
+---
+
+# 🧱 Controles de Defesa para Camada 7
+
+## 🔐 1. Autenticação e Autorização Fortes
+- MFA obrigatório  
+- Tokens com expiração curta  
+- Sessão rotacionada após login  
+- Políticas de RBAC/ABAC  
+
+---
+
+## 📊 2. Monitoramento e Observabilidade
+- WAF com regras atualizadas  
+- IDS/IPS com inspeção profunda (DPI)  
+- Rate limit e throttling  
+- Logging detalhado com correlação  
+- Análise de User-Agent, IP, ASN  
+
+Não dá para proteger o que você não vê.
+
+---
+
+## 🛡️ 3. WAF (Web Application Firewall)
+WAF moderno filtra tráfego malicioso em:
+
+- SQLi  
+- XSS  
+- LFI/RFI  
+- Force brute  
+- Exploits automatizados  
+- Ataques de bots  
+
+Ferramentas:  
+Cloudflare WAF • ModSecurity • AWS WAF • F5 ASM
+
+---
+
+## 🔧 4. Hardening e Boas Práticas
+- Desabilitar portas e endpoints desnecessários  
+- Sanitização de input e output  
+- Headers de segurança:  
+  - `X-Frame-Options`  
+  - `Content-Security-Policy`  
+  - `Strict-Transport-Security`  
+  - `X-Content-Type-Options`  
+- TLS forçado  
+- Taxas máximas por IP  
+
+---
+
+## 🚨 5. Proteção de API
+- Rate limit por chave  
+- Rotação de tokens  
+- Escopo de permissões  
+- Filtering de IP/origem  
+- Validação rígida do schema  
+- Remover debug e introspection  
+
+---
+
+# 🧪 Ferramentas para Pentest em Camada 7
+
+- **Burp Suite / OWASP ZAP** (principal)  
+- **Nmap NSE scripts**  
+- **Nikto**  
+- **sqlmap**  
+- **Feroxbuster / Gobuster**  
+- **ffuf**  
+- **WFuzz**  
+- **Postman / Insomnia**  
+- **httpx / nuclei**  
+
+---
+
+# 🧩 Resumo Final
+A Camada 7 é onde estão:
+- As aplicações  
+- Os usuários  
+- Os dados  
+- Os serviços críticos  
+- As APIs  
+- Os ataques mais sofisticados  
+
+É também onde ocorre **90% das invasões modernas**.
+
+Ignorar segurança na Camada 7 é ignorar o ponto mais vulnerável da empresa.
+
+---
+
+# 📢 Quer se aprofundar nas vulnerabilidades da Camada 7?
+
+Se você chegou até aqui, vale dar um passo além.  
+Preparei um repositório **dedicado ao OWASP Top 10**, onde destrincho cada vulnerabilidade com:
+
+- Exemplos práticos  
+- Explicações técnicas  
+- Cenários reais  
+- Vetores de ataque  
+- Formas de mitigação  
+- Demonstrações e payloads  
+
+Se a Camada 7 é o ponto mais atacado da segurança moderna, o **OWASP 10 é o mapa do campo de batalha**.
