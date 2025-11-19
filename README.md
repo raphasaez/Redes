@@ -337,7 +337,230 @@ Porque é nela que a LAN vive.
 
 Sem uma Camada 2 sólida, qualquer iniciativa de segurança ou roteamento vira caos.
 
+---
 
+# 🌐 Camada 3 – Rede (Redes Corporativas)
+
+A Camada 3 do modelo OSI é responsável pelo **endereçamento lógico**, **roteamento** e **comunicação entre redes distintas**.  
+É aqui que a LAN deixa de ser um ambiente isolado e passa a conversar com outras sub-redes, filiais, datacenters e a internet.
+
+---
+
+## 🧠 O que a Camada 3 controla
+
+- Endereçamento IP  
+- Sub-redes e máscaras  
+- Roteamento (estático e dinâmico)  
+- Gateways  
+- Fragmentação de pacotes  
+- Tráfego entre VLANs (Inter-VLAN Routing)  
+- Filtragem básica por ACLs  
+- Protocolos de descoberta e resolução (ICMP / ARP)  
+
+Se a Camada 2 organiza a LAN, **a Camada 3 decide para onde os pacotes vão**.
+
+---
+
+## 🧭 Endereçamento IP
+
+A base da comunicação L3 é o endereço IP.
+
+### IPv4:
+- 32 bits  
+- 4.3 bilhões de endereços (já exaustos)  
+- Utiliza NAT para suportar escala  
+
+### IPv6:
+- 128 bits  
+- Espaço virtualmente inesgotável  
+- Segurança nativa (IPsec integrado)  
+
+### Máscara de sub-rede
+Define:
+- Tamanho da sub-rede  
+- Quantidade de hosts  
+- Limites de broadcast  
+
+Exemplo:  
+`192.168.10.0/24` → 254 hosts possíveis.
+
+---
+
+## 🚦 Roteadores
+
+Roteadores são o núcleo da Camada 3.
+
+### Funções essenciais:
+- Tomada de decisão por IP  
+- Interconexão entre redes  
+- Inter-VLAN routing  
+- Segmentação lógica avançada  
+- Aplicação de ACLs (filtro L3/L4)  
+- Encapsulamento de tráfego para WAN/VPN  
+- Comunicação com switches via interfaces trunk ou routed  
+
+Sem roteador, a empresa fica presa em uma única LAN gigante e insegura.
+
+---
+
+## 🔀 Roteamento
+
+### ✔️ Roteamento Estático
+- Totalmente manual  
+- Usado para redes pequenas e rotas simples  
+- Previsível, porém rígido  
+
+### ✔️ Roteamento Dinâmico
+Utiliza protocolos para trocar rotas automaticamente.
+
+Principais:
+- **OSPF** (intraempresa, roteamento interno)  
+- **EIGRP** (Cisco)  
+- **BGP** (WAN e internet, provedores)  
+
+Benefícios:
+- Convergência automática  
+- Redundância  
+- Balanceamento de carga  
+
+Em ambientes corporativos médios e grandes, **OSPF** domina.
+
+---
+
+## 🔄 NAT — Network Address Translation
+O **NAT** permite que vários dispositivos da rede interna acessem a internet usando **um único endereço IPv4 público**.  
+Sem ele, o esgotamento de IPv4 tornaria muitas redes inviáveis.
+
+**Funções principais:**
+- Ocultar IPs internos (segurança básica).
+- Economizar endereços públicos.
+- Permitir comunicação entre redes com espaçamentos privados.
+
+**Tipos mais comuns:**
+- **SNAT** — Source NAT (alteração do IP de origem).
+- **DNAT** — Destination NAT (redirecionamento de portas).
+- **PAT** — Port Address Translation (o mais comum, usado em roteadores domésticos).
+
+---
+
+## 🧩 DHCP — Dynamic Host Configuration Protocol
+O **DHCP** automatiza a entrega de configurações IP para as máquinas da rede.  
+Dispensa configuração manual e evita conflitos.
+
+**Entrega automaticamente:**
+- Endereço **IP**
+- **Máscara** de rede
+- **Gateway** padrão
+- **DNS**
+- Tempo de concessão (**lease time**)
+
+**Benefícios:**
+- Reduz erros humanos  
+- Torna a gestão da rede mais simples  
+- Muito usado em redes corporativas e domésticas  
+
+---
+
+## 🚪 Gateway — Porta de Saída da Rede
+O **gateway padrão** é o equipamento que **interliga sua LAN ao resto do mundo**.  
+É, basicamente, o dispositivo que recebe pacotes destinados a outras redes.
+
+**Exemplos de gateway:**
+- Roteador corporativo
+- Firewall
+- Switch Layer 3
+- Equipamento de borda do provedor
+
+**Função essencial:**
+> Sem um gateway, os hosts só conversam dentro da própria LAN.
+
+---
+
+## 📌 Relação entre eles
+- O **gateway** é quem normalmente implementa **NAT** para acessar a internet.  
+- O **DHCP** entrega automaticamente o **gateway padrão** aos dispositivos.  
+- Juntos, mantêm a rede funcional, escalável e administrável.
+
+## 🛠️ ARP – Address Resolution Protocol
+
+ARP é L2.5, mas essencial na Camada 3.  
+Ele traduz **IP → MAC** para permitir que pacotes IP sejam entregues via Ethernet.
+
+Sem ARP:
+- Nada na LAN funciona  
+- Clientes não alcançam o gateway  
+- Roteadores não comunicam com switches  
+
+Também é alvo comum de ataques internos (ARP Spoofing).
+
+---
+
+## 📡 Access Points na Camada 3
+
+Access Points corporativos vão muito além de “wifi”.
+
+Funções L3:
+- Atribuição de VLAN por SSID  
+- Autenticação 802.1X (via Radius)  
+- DHCP relay  
+- Captive Portal  
+- Controle via CAPWAP (gerenciamento centralizado)  
+- Firewall básico em alguns modelos  
+- Roteamento local em APs com NAT (dependendo da arquitetura)  
+
+AP bem configurado = Wi-Fi estável, isolado e seguro.
+
+---
+
+## 🔐 Segurança em Camada 3
+
+A Camada 3 é onde as políticas realmente começam a ganhar força.
+
+### Controles típicos:
+- ACLs (permit/deny baseado em IP e portas)  
+- Segmentação por sub-redes  
+- Isolamento entre departamentos via inter-VLAN  
+- Filtragem de ICMP  
+- Controle de tráfego lateral  
+- Firewalls de borda  
+
+### Riscos comuns:
+- Máscaras erradas  
+- Gateways duplicados  
+- Roteamento sobreposto  
+- Falhas em ACLs expondo servidores  
+- ARP poisoning afetando roteamento local  
+
+---
+
+## 📈 Troubleshooting L3 na prática
+
+- `ping` (testar reachabilidade)  
+- `traceroute`  
+- Verificação de gateway padrão  
+- Conferência de rotas (`ip route`, `show ip route`)  
+- Checagem de ARP (`arp -a`, `show ip arp`)  
+- Análise de ICMP  
+- Loopback tests  
+
+90% dos problemas corporativos de rede são erros de gateway, rota ou máscara.
+
+---
+
+## 🎯 Por que a Camada 3 importa?
+
+Porque é ela que **faz a empresa funcionar como várias redes bem organizadas**, e não como um amontoado de máquinas brigando por broadcast.
+
+Sem Camada 3 configurada direito:
+- Wi-Fi falha  
+- Filiais não se conectam  
+- Servidores ficam inacessíveis  
+- Firewalls perdem eficácia  
+- A LAN vira um caos de broadcast  
+
+A Camada 3 é o ponto onde **rede, segurança e arquitetura se unem**.
+
+---
 
 # 🔐 Segurança de Redes — Foco na Camada 4 (Transporte)
 
