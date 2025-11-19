@@ -197,6 +197,148 @@ Mas **se o bit não chegar inteiro**, o resto é irrelevante.
 
 ---
 
+# 🔗 Camada 2 – Enlace de Dados (Redes Corporativas)
+
+A Camada 2 do modelo OSI controla como os dispositivos compartilham o meio físico e garante que os quadros (frames) trafeguem com integridade dentro de uma mesma rede local. É a camada que realmente dá “forma” à LAN corporativa.
+
+---
+
+## 🧩 O que a Camada 2 trata
+
+- Endereçamento MAC  
+- Switches e bridges  
+- Detecção e prevenção de colisões  
+- VLANs  
+- Trunking (802.1Q)  
+- STP e suas variantes  
+- Controle de fluxo  
+- QoS básica (priorização L2)  
+
+A Camada 2 define como os quadros se movem entre hosts **sem depender de roteamento**.
+
+---
+
+## 🧬 Endereçamento MAC
+
+Cada interface de rede possui um endereço físico único.  
+A Camada 2 depende deste endereço para entregar frames dentro da mesma LAN.
+
+- 48 bits  
+- Hexadecimal  
+- Formato: `AA:BB:CC:DD:EE:FF`
+
+---
+
+## 🔀 Switches (O cérebro da LAN)
+
+### O que eles fazem:
+- Aprendem MACs dinamicamente  
+- Fazem forwarding inteligente (não broadcast)  
+- Suportam segmentação lógica via VLAN  
+- Evitam loops com STP  
+- Garantem full-duplex e redução de colisões  
+
+São o coração da infraestrutura interna corporativa.
+
+---
+
+## 🧱 VLANs (Virtual LANs)
+
+VLANs segmentam a rede lógica sem alterar o cabeamento físico.
+
+### Benefícios:
+- Maior segurança interna  
+- Menos broadcast  
+- Segmentação por setores  
+- Isolamento de servidores críticos  
+- Facilita políticas de acesso  
+
+### Tipos:
+- **Access**: porta pertence a uma VLAN fixa  
+- **Trunk**: carrega múltiplas VLANs usando uma tag 802.1Q  
+
+---
+
+## 🌉 STP – Spanning Tree Protocol
+
+Evita loops em topologias corporativas com redundância.
+
+### Variantes:
+- STP  
+- RSTP  
+- MSTP  
+
+### Problemas comuns:
+- Convergência lenta (em STP clássico)  
+- Porta em estado errado  
+- Configurações erradas de prioridade  
+
+---
+
+## 📶 Controle de fluxo e QoS L2
+
+- Pause frames (802.3x)  
+- Priorização L2 (CoS – 802.1p)  
+- Redução de congestionamento em links internos  
+
+Especialmente útil em ambientes com VoIP, câmeras e serviços sensíveis a latência.
+
+---
+
+## 📡 Protocolos e tecnologias relevantes
+
+- **Ethernet** (o padrão dominante)  
+- **LLDP** (descoberta de vizinhança)  
+- **LACP** (agregação de links – 802.3ad)  
+- **ARP** (técnico na L2.5, mas impacta diretamente a LAN)  
+- **CDP** (Cisco Discovery Protocol)  
+
+---
+
+## 🛡️ Segurança em Camada 2
+
+A camada 2 é um alvo direto em redes corporativas. É aqui que ocorrem ataques “silenciosos”.
+
+### Principais riscos:
+- ARP Spoofing / ARP Poisoning  
+- MAC Flooding  
+- Port Stealing  
+- VLAN Hopping  
+- STP Manipulation  
+- Rogue Switches  
+
+### Contramedidas:
+- Port Security  
+- Dynamic ARP Inspection  
+- DHCP Snooping  
+- BPDU Guard  
+- Root Guard  
+- Storm Control  
+
+---
+
+## 🛠️ Troubleshooting na prática
+
+- Verificar tabela MAC do switch  
+- Checar VLAN da porta  
+- Conferir trunks e tags  
+- Analise de BPDUs  
+- Loop detection  
+- Monitoramento de broadcast/multicast  
+
+Switch configurado errado = metade da empresa parada.
+
+---
+
+## 🎯 Por que a Camada 2 importa?
+
+Porque é nela que a LAN vive.  
+É nela que você controla quem fala com quem, como os quadros trafegam e como você mantém a rede interna segura e organizada.
+
+Sem uma Camada 2 sólida, qualquer iniciativa de segurança ou roteamento vira caos.
+
+
+
 # 🔐 Segurança de Redes — Foco na Camada 4 (Transporte)
 
 A camada 4 é onde o tráfego deixa de ser só “dados” e vira **conexões reais**, com portas, estados e fluxos controlados. É também o ponto onde a maioria dos ataques práticos ocorre, porque aqui vivem **TCP, UDP, multiplexação e gerenciamento de sessões** — tudo aquilo que firewalls, scanners e atacantes adoram explorar.
